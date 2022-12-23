@@ -32,4 +32,4 @@ houseSchema.plugin(AutoIncrement, {
     start_seq: 500
 })
 
-module.exports = mongoose.model('House', houseShema)
+module.exports = mongoose.model('House', houseSchema)
