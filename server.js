@@ -12,6 +12,8 @@ const mongoose = require('mongoose')
 const { logEvents } = require('./middleware/logger')
 const PORT = process.env.PORT || 3500
 
+mongoose.set('strictQuery', true);
+
 console.log(process.env.NODE_ENV)
 
 connectDB()

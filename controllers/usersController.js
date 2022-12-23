@@ -7,8 +7,11 @@ const bcrypt = require('bcrypt')
 // @route GET /users
 // @access Private
 const getAllUsers = asyncHandler(async (req, res) => {
+    //Get all users from MongoDB
     const users = await User.find().select('-password').lean()
-    if (!users) {
+
+    //if no users
+    if (!users?.length) {
         return res.status(400).json({ message: 'No users found' })
     }
     res.json(users)
@@ -95,8 +98,8 @@ const deleteUser = asyncHandler(async (req, res) => {
         return res.status(400).json({ message: 'User Id Required'})
     }
 
-    const houses = await House.findOne({ user: id }).lean().exec()
-    if (houses?.length) {
+    const house = await House.findOne({ user: id }).lean().exec()
+    if (house) {
         return res.status(400).json({ message: 'User has assigned houses'})
     }
 
