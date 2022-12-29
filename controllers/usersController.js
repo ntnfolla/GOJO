@@ -7,10 +7,7 @@ const bcrypt = require('bcrypt')
 // @route GET /users
 // @access Private
 const getAllUsers = asyncHandler(async (req, res) => {
-    //Get all users from MongoDB
     const users = await User.find().select('-password').lean()
-
-    //if no users
     if (!users?.length) {
         return res.status(400).json({ message: 'No users found' })
     }
@@ -61,6 +58,7 @@ const updateUser = asyncHandler(async (req, res) => {
         return res.status(400).json({ message: 'All fields are required'})
     }
 
+    // Does the user exist to update?
     const user = await User.findById(id).exec()
 
     if (!user) {
@@ -69,6 +67,7 @@ const updateUser = asyncHandler(async (req, res) => {
 
     // Check for duplicate
     const duplicate = await User.findOne({ username }).lean().exec()
+
     // Allow updates to the original user
     if (duplicate && duplicate?._id.toString() !== id) {
         return res.status(409).json({ message: 'Duplicate username'})
@@ -94,15 +93,18 @@ const updateUser = asyncHandler(async (req, res) => {
 const deleteUser = asyncHandler(async (req, res) => {
     const { id } = req.body
 
+    // confirm data
     if (!id) {
         return res.status(400).json({ message: 'User Id Required'})
     }
 
+    // Does the user still have assigned houses?
     const house = await House.findOne({ user: id }).lean().exec()
     if (house) {
         return res.status(400).json({ message: 'User has assigned houses'})
     }
 
+    // Does the user exist to delete?
     const user = await User.findById(id).exec()
 
     if (!user) {

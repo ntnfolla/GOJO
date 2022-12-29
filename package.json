@@ -19,9 +19,6 @@
   },
   "homepage": "https://github.com/ntnfolla/GOJO#readme",
   "dependencies": {
-    "@fortawesome/fontawesome-svg-core": "^6.2.1",
-    "@fortawesome/free-solid-svg-icons": "^6.2.1",
-    "@fortawesome/react-fontawesome": "^0.2.0",
     "bcrypt": "^5.1.0",
     "cookie-parser": "^1.4.6",
     "cors": "^2.8.5",
@@ -31,9 +28,6 @@
     "express-async-handler": "^1.2.0",
     "mongoose": "^6.8.1",
     "mongoose-sequence": "^5.3.1",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "react-router-dom": "^6.6.1",
     "uuid": "^9.0.0"
   },
   "devDependencies": {
